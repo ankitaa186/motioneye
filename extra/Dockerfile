@@ -45,11 +45,15 @@ RUN echo "deb http://snapshot.debian.org/archive/debian/$(date +%Y%m%d) sid main
     sed -i -e "s/^\(motion:[^:]*\):[0-9]*:[0-9]*:\(.*\)/\1:${RUN_UID}:${RUN_GID}:\2/" /etc/passwd && \
     sed -i -e "s/^\(motion:[^:]*\):[0-9]*:\(.*\)/\1:${RUN_GID}:\2/" /etc/group && \
     pip install /tmp/motioneye && \
+	#Ankit's custom commands
+	#install cifs utils for samba share
+	apt-get -t stable --yes --option Dpkg::Options::="--force-confnew" --no-install-recommends install \ 
+	cifs-utils && \
     # Cleanup
-    rm -rf /tmp/motioneye && \
-    apt-get purge --yes python-setuptools python-wheel && \
-    apt-get autoremove --yes && \
-    apt-get --yes clean && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
+    rm -rf /tmp/motioneye	
+#    apt-get purge --yes python-setuptools python-wheel && \
+#    apt-get autoremove --yes && \
+#    apt-get --yes clean && rm -rf /var/lib/apt/lists/* && rm -f /var/cache/apt/*.bin
 
 ADD extra/motioneye.conf.sample /usr/share/motioneye/extra/
 
@@ -58,6 +62,10 @@ VOLUME /etc/motioneye
 
 # Video & images
 VOLUME /var/lib/motioneye
+
+#Setting timezone
+ENV TZ=America/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 CMD test -e /etc/motioneye/motioneye.conf || \
     cp /usr/share/motioneye/extra/motioneye.conf.sample /etc/motioneye/motioneye.conf ; \

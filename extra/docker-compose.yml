@@ -2,13 +2,17 @@
 version: "3.5"
 services:
   motioneye:
-    image: ccrisan/motioneye:master-amd64  # Change to ccrisan/motioneye:master-armhf for ARM chips (Pi etc.)
+    privileged: true
+    image: ankitaa186/motioneye:master-amd64  # Change to ccrisan/motioneye:master-armhf for ARM chips (Pi etc.)
     ports:
       - "8081:8081"
       - "8765:8765"
     volumes:
       - etc_motioneye:/etc/motioneye
       - var_lib_motioneye:/var/lib/motioneye
+    environment:
+      TZ: "America/Los Angeles"
+    restart: always
 
 volumes:
   etc_motioneye:
