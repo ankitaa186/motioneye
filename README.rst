@@ -17,12 +17,12 @@ Ankit's custom instructions
 Build motioneye image
 ---------------------
 
-```docker build --build-arg VCS_REF=$(git rev-parse HEAD) --build-arg BUILD_DATE="2021-01-24T1951" -t ankitaa186/motioneye:master-amd64 -f extra/Dockerfile . ```
+``docker build --build-arg VCS_REF=$(git rev-parse HEAD) --build-arg BUILD_DATE="2021-01-24T1951" -t ankitaa186/motioneye:master-amd64 -f extra/Dockerfile . ``
 
 Run using docker-compose
 ------------------------
 
-```docker-compose -f extra\docker-compose.yml -p motioneye up -d```
+``docker-compose -f extra\docker-compose.yml -p motioneye up -d``
 
 Tips
 ----
