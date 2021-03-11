@@ -66,7 +66,7 @@ smb_mount_root /media
 
 # path to the localtime file
 # (enable this to configure the system time zone from the UI)
-#local_time_file /etc/localtime
+local_time_file /etc/localtime
 
 # enables shutdown and rebooting after changing system settings
 # (such as wifi settings or time zone)

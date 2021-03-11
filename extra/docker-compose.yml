@@ -11,7 +11,7 @@ services:
       - etc_motioneye:/etc/motioneye
       - var_lib_motioneye:/var/lib/motioneye
     environment:
-      TZ: "America/Los Angeles"
+      TZ: "America/Los_Angeles"
     restart: always
 
 volumes:
